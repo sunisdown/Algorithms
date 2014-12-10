@@ -1,25 +1,50 @@
 * 程序员应该掌握的50中算法
 
-** 排序
+** 排序 [75%]
 
-*** DONE Elementary Sort
-    - [X] Insertion
-    - [X] selection
-    - [X] shell
+*** DONE Elementary Sort [3/3]
+**** DONE Insertion
+**** DONE selection
+**** DONE shell
 
-*** DONE Merge sort
-    - [X] merge
-*** DONE Quick sort
-    - [X] quick
+*** DONE Merge sort [1/1]
+**** DONE merge
+*** DONE Quick sort [1/1]
+**** DONE quick
 
-*** TODO Priority Queues
-    - [ ] TopM
+*** TODO Priority Queues [0/1]
+**** TODO TopM
 
-** 查找
+** 查找 [25%]
 
-*** TODO Binary Search
-    - [ ] binary search
+*** DONE Binary Search
+
+*** TODO Binary Search Tree
+**** TODO binary search
 
 *** TODO Balanced Search Trees
 
 *** TODO Hash Tables
+
+
+** 图[0%]
+
+*** TODO 无向图
+
+*** TODO 有向图
+
+*** TODO 最小生成树
+
+*** TODO 最短路径
+
+** 字符串 [0%]
+
+*** TODO 字符串排序
+
+*** TODO 单词查找树
+
+*** TODO 字符串查找
+
+*** TODO 正则
+
+*** TODO 数据压缩
