@@ -13,7 +13,13 @@
     - [X] quick
 
 *** TODO Priority Queues
-
     - [ ] TopM
 
 ** 查找
+
+*** TODO Binary Search
+    - [ ] binary search
+
+*** TODO Balanced Search Trees
+
+*** TODO Hash Tables
