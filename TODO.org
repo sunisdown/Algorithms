@@ -2,12 +2,18 @@
 
 ** 排序
 
-*** TODO Elementary Sort
+*** DONE Elementary Sort
     - [X] Insertion
     - [X] selection
     - [X] shell
+
+*** DONE Merge sort
     - [X] merge
+*** DONE Quick sort
     - [X] quick
 
-*** TODO Merge sort
-*** TODO Quick sort
+*** TODO Priority Queues
+
+    - [ ] TopM
+
+** 查找
