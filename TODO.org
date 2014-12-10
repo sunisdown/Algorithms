@@ -4,20 +4,20 @@
 
 *** DONE Elementary Sort [3/3]
 **** DONE [[src/insertion_sort.py][Insertion]]
-**** DONE selection
-**** DONE shell
+**** DONE [[src/selection_sort.py][selection]]
+**** DONE [[src/shell_sort.py][shell]]
 
 *** DONE Merge sort [1/1]
-**** DONE merge
+**** DONE [[src/merge_sort.py][merge]]
 *** DONE Quick sort [1/1]
-**** DONE quick
+**** DONE [[src/quick_sort.py][quick]]
 
 *** TODO Priority Queues [0/1]
 **** TODO TopM
 
 ** 查找 [25%]
 
-*** DONE Binary Search
+*** DONE [[src/binary_search.py][Binary Search]]
 
 *** TODO Binary Search Tree
 **** TODO binary search
