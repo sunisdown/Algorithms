@@ -3,7 +3,7 @@
 ** 排序 [75%]
 
 *** DONE Elementary Sort [3/3]
-**** DONE [[Insertion][src/insertion_sort.py]]
+**** DONE [[insertion_sort.py][Insertion]]
 **** DONE selection
 **** DONE shell
 
