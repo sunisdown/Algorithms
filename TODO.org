@@ -1,0 +1,13 @@
+* 程序员应该掌握的50中算法
+
+** 排序
+
+*** TODO Elementary Sort
+    - [X] Insertion
+    - [X] selection
+    - [X] shell
+    - [X] merge
+    - [X] quick
+
+*** TODO Merge sort
+*** TODO Quick sort
