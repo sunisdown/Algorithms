@@ -15,14 +15,15 @@
 *** TODO Priority Queues [0/1]
 **** TODO TopM
 
-** 查找 [25%]
+** 查找 [50%]
 
 *** DONE [[src/binary_search.py][Binary Search]]
 
-*** TODO Binary Search Tree
-**** TODO binary search
+*** DONE BST
+**** DONE BST
 
 *** TODO Balanced Search Trees
+***** TODO RedBlackBST
 
 *** TODO Hash Tables
 
