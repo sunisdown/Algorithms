@@ -20,7 +20,7 @@
 *** DONE [[src/binary_search.py][Binary Search]]
 
 *** DONE BST
-**** DONE BST
+**** DONE [[src/BST.py][BST]]
 
 *** TODO Balanced Search Trees
 ***** TODO RedBlackBST
