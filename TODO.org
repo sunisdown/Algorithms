@@ -12,18 +12,19 @@
 *** DONE Quick sort [1/1]
 **** DONE [[src/quick_sort.py][quick]]
 
-*** TODO Priority Queues [0/1]
+*** TODO Priority Queues [1/2]
 **** TODO TopM
+**** DONE MinPQ
 
 ** 查找 [50%]
 
 *** DONE [[src/binary_search.py][Binary Search]]
 
-*** DONE BST
+*** DONE BST [1/1]
 **** DONE [[src/BST.py][BST]]
 
-*** TODO Balanced Search Trees
-***** TODO RedBlackBST
+*** TODO Balanced Search Trees [0/1]
+**** TODO RedBlackBST
 
 *** TODO Hash Tables
 
