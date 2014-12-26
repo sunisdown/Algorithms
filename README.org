@@ -21,7 +21,7 @@ Python Algorithms and Data Structures
 
 **** TODO Priority Queues [1/2]
 ***** TODO TopM
-***** DONE MinPQ
+***** DONE [[src/minpq.go][MinPQ]]
 
 *** 查找 [50%]
 
