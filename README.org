@@ -22,15 +22,15 @@ Python Algorithms and Data Structures
 ***** TODO TopM
 ***** DONE [[src/minpq.go][MinPQ]]
 
-*** 查找 [50%]
+*** 查找 [75%]
 
 **** DONE [[src/binary_search.py][Binary Search]]
 
 **** DONE BST [1/1]
-***** DONE [[src/BST.py][BST]]
+***** DONE [src/BST.py][BST]]
 
-**** TODO Balanced Search Trees [0/1]
-***** TODO RedBlackBST
+**** DONE Balanced Search Trees [1/1]
+***** DONE [[src/rbbst.go][RedBlackBST]]
 
 **** TODO Hash Tables
 
