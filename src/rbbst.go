@@ -18,6 +18,12 @@ type Node struct {
 	color        bool
 }
 
+type RBTree struct {
+	sync.RWMutex
+	count  int
+	root   *Node
+}
+
 func newNode(key int, value interface{}, color bool) *Node {
 	return &Node{
 		key: key,
@@ -26,36 +32,43 @@ func newNode(key int, value interface{}, color bool) *Node {
 	}
 }
 
-func isRed(node *Node) bool {
-	if node == nil {
-		return false
+func newRBTree() *RBTree {
+	return &RBTree{
+		count: 0,
+		root:nil,
 	}
-	return node.color
 }
 
-func put(node *Node, key int, val interface{}) *Node {
-	if node == nil {
+func (self *Node)isRed() bool {
+	if self == nil {
+		return false
+	}
+	return self.color
+}
+
+func (self *Node) put(key int, val interface{}) *Node {
+	if self == nil {
 		return newNode(key, val, Red)
 	}
-	if key < node.key {
-		node.left = put(node.left, key, val)
-	} else if key > node.key {
-		node.right = put(node.right, key, val)
+	if key < self.key {
+		self.left = self.left.put(key, val)
+	} else if key > self.key {
+		self.right = self.right.put(key, val)
 	} else {
-		node.value = val
+		self.value = val
 	}
 	
-	if isRed(node.right) && !isRed(node.left) {
-		node = node.rotateLeft()
+	if self.right.isRed() && !self.left.isRed() {
+		self = self.rotateLeft()
 	}
-	if isRed(node.left) && isRed(node.left.left) {
-		node = node.rotateRight()
+	if self.left.isRed() && self.left.left.isRed() {
+		self = self.rotateRight()
 	}
-	if isRed(node.left) && isRed(node.right) {
-		node.flipColors()
+	if self.left.isRed() && self.right.isRed() {
+		self.flipColors()
 	}
 	
-	return node
+	return self
 }
 
 func (self *Node) get(key int) interface{} {
@@ -107,21 +120,71 @@ func (self *Node) deleteMin() *Node {
 	if (self.left == nil) {
 		return nil
 	}
-	if (!isRed(self.left) && !isRed(self.left.left)) {
+	if (!self.left.isRed() && !self.left.left.isRed()) {
 		self = self.moveRedLeft()
 	}
 	self.left = self.left.deleteMin()
 	return self.balance()
 }
 
-func (self *Node) balance() *Node {
-	if isRed(self.right) {
-		self = self.rotateLeft()
-	}
-	if isRed(self.left) && isRed(self.left.left) {
+func (self *Node) deleteMax() *Node {
+	if self.left.isRed() {
 		self = self.rotateRight()
 	}
-	if isRed(self.left) && isRed(self.right) {
+	if self.right == nil {
+		return nil
+	}
+	if !self.right.isRed() && !self.right.left.isRed() {
+		self = self.moveRedRight()
+	}
+	self.right = self.right.deleteMax()
+	return self.balance()
+}
+
+func (self *Node) delete(key int) *Node {
+	if key < self.key {
+		if !self.left.isRed() && !self.left.left.isRed() {
+			self = self.moveRedLeft()
+		}
+		self.left = self.left.delete(key)
+	} else {
+		if self.left.isRed() {
+			self = self.rotateRight()
+		}
+		if (key == self.key) && (self.right == nil) {
+			return nil
+		}
+		if !self.right.isRed() && self.right.left.isRed() {
+			self = self.moveRedRight()
+		}
+		if key == self.key {
+			node := self.right.min()
+			self.key = node.key
+			self.value = node.value
+			self.right = self.right.deleteMin()
+		} else {
+			self.right = self.right.delete(key)
+		}
+	}
+	return self.balance()
+}
+
+func (self *Node) min() *Node {
+	if (self.left == nil) {
+		return self
+	} else {
+		return self.left.min()
+	}
+}
+
+func (self *Node) balance() *Node {
+	if self.right.isRed() {
+		self = self.rotateLeft()
+	}
+	if self.left.isRed() && self.left.left.isRed() {
+		self = self.rotateRight()
+	}
+	if self.left.isRed() && self.right.isRed() {
 		self.flipColors()
 	}
 	return self
@@ -129,7 +192,7 @@ func (self *Node) balance() *Node {
 
 func (self *Node) moveRedLeft() *Node {
 	self.flipColors()
-	if isRed(self.right.left) {
+	if self.right.left.isRed() {
 		self.right = self.right.rotateRight()
 		self = self.rotateLeft()
 	}
@@ -138,23 +201,10 @@ func (self *Node) moveRedLeft() *Node {
 
 func (self *Node) moveRedRight() *Node {
 	self.flipColors()
-	if isRed(self.left.left) {
+	if self.left.left.isRed() {
 		self = self.rotateRight()
 	}
 	return self
-}
-
-type RBTree struct {
-	sync.RWMutex
-	count  int
-	root   *Node
-}
-
-func newRBTree() *RBTree {
-	return &RBTree{
-		count: 0,
-		root:nil,
-	}
 }
 
 func (self *RBTree) isEmpty() bool {
@@ -162,7 +212,7 @@ func (self *RBTree) isEmpty() bool {
 }
 
 func (self *RBTree) put(key int, val interface{}) {
-	self.root = put(self.root, key, val)
+	self.root = self.root.put(key, val)
 	self.root.color = Black
 }
 
@@ -173,8 +223,9 @@ func (self *RBTree) get(key int) interface{} {
 func (self *RBTree) deleteMin() {
 	if self.isEmpty() {
 		fmt.Println("BST underflow")
+		return
 	}
-	if isRed(self.root.left) && !isRed(self.root.right) {
+	if !self.root.left.isRed() && !self.root.right.isRed() {
 		self.root.color = Red
 	}
 	self.root = self.root.deleteMin()
@@ -184,14 +235,36 @@ func (self *RBTree) deleteMin() {
 }
 
 func (self *RBTree) deleteMax() {
+	if self.isEmpty() {
+		fmt.Println("BST underflow")
+		return
+	}
+	if !self.root.left.isRed() && !self.root.right.isRed() {
+		self.root.color = Red
+	}
+	self.root = self.root.deleteMax()
+	if !self.isEmpty() {
+		self.root.color = Black
+	}
+}
+
+func (self *RBTree) hasKey(key int) bool {
+	return self.get(key) != nil
 }
 
 func (self *RBTree) delete(key int) {
+	if !self.hasKey(key) {
+		fmt.Println("RBTree doesn't has key: ", key)
+		return
+	}
+	if !self.root.left.isRed() && !self.root.right.isRed() {
+		self.root.color = Red
+	}
+	self.root = self.root.delete(key)
+	if !self.isEmpty() {
+		self.root.color = Black
+	}
 }
-
-func (self *RBTree) remove(node *Node) {
-}
-
 
 func main() {
 	rbtree := newRBTree()
@@ -209,16 +282,22 @@ func main() {
 	fmt.Println(rbtree.root.value)
 	rbtree.put(6, "世界")
 	fmt.Println(rbtree.root.value)
+	fmt.Println("min", rbtree.root.min())
 	hello := rbtree.get(1)
 	fmt.Println("get 6 ", hello)
 	rbtree.deleteMin()
 	fmt.Println(rbtree.root.value)
+	rbtree.deleteMax()
 	rbtree.deleteMin()
 	fmt.Println(rbtree.root.value)
 	rbtree.deleteMin()
 	fmt.Println(rbtree.root.value)
 	rbtree.deleteMin()
 	fmt.Println(rbtree.root.value)
+	rbtree.deleteMin()
+	fmt.Println(rbtree.root)
+	rbtree.deleteMin()
+	fmt.Println(rbtree.root)
 	rbtree.deleteMin()
 	fmt.Println(rbtree.root)
 }
