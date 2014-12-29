@@ -27,7 +27,7 @@ Python Algorithms and Data Structures
 **** DONE [[src/binary_search.py][Binary Search]]
 
 **** DONE BST [1/1]
-***** DONE [src/BST.py][BST]]
+***** DONE [[src/BST.py][BST]]
 
 **** DONE Balanced Search Trees [1/1]
 ***** DONE [[src/rbbst.go][RedBlackBST红黑树]]
