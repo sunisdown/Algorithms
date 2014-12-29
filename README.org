@@ -30,7 +30,7 @@ Python Algorithms and Data Structures
 ***** DONE [src/BST.py][BST]]
 
 **** DONE Balanced Search Trees [1/1]
-***** DONE [[src/rbbst.go][RedBlackBST]]
+***** DONE [[src/rbbst.go][RedBlackBST红黑树]]
 
 **** TODO Hash Tables
 
