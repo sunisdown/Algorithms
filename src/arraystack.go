@@ -42,10 +42,12 @@ func (as *ArrayStack) Push(x int) error {
 	}
 }
 
+// 判断是否为空
 func (as *ArrayStack) isEmpty() bool {
 	return as.size() == 0
 }
 
+// 判断栈是否为空
 func (as *ArrayStack) isFull() bool {
 	return as.size() == cap(as.list)
 }
