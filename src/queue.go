@@ -33,7 +33,7 @@ func (self *Queue) isEmpty() bool {
 	return self.count == 0
 }
 
-func (self *Queue) enqueue(item interface{}) {
+func (self *Queue) Enqueue(item interface{}) {
 	self.lock.Lock()
 	defer self.lock.Unlock()
 
@@ -49,7 +49,7 @@ func (self *Queue) enqueue(item interface{}) {
 	self.count++
 }
 
-func (self *Queue) dequeue() *Node {
+func (self *Queue) Dequeue() *Node {
 	self.lock.Lock()
 	defer self.lock.Unlock()
 	item := self.head
@@ -63,10 +63,10 @@ func (self *Queue) dequeue() *Node {
 
 func main() {
 	var queue *Queue = NewQueue()
-	queue.enqueue(1)
-	queue.enqueue(2)
-	queue.enqueue(3)
+	queue.Enqueue(1)
+	queue.Enqueue(2)
+	queue.Enqueue(3)
 	fmt.Println(queue.head.item)
-	queue.dequeue()
+	queue.Dequeue()
 	fmt.Println(queue.head.item)
 }
