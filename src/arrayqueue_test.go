@@ -6,12 +6,12 @@ import (
 )
 
 func TestArray(t *testing.T) {
-	Convey("创建一个环形队列", t, func() {
+	Convey("创建一个环形队列", t, func() { // 数据表驱动
 		q := NewArrayQueueA()
 		So(q.head, ShouldEqual, 0)
 		Convey("添加数据", func() {
 			q.Enqueue(3)
-			devalue, err := q.Dequeue()
+			devalue, err := q.Dequeue() // 命名
 			So(err, ShouldEqual, nil)
 			So(devalue, ShouldEqual, 3)
 			Convey("添加数据", func() {
@@ -19,7 +19,7 @@ func TestArray(t *testing.T) {
 				q.Enqueue(1)
 				q.Enqueue(2)
 				q.Enqueue(3)
-				q.Enqueue(4)
+				q.Enqueue(4) // 下一个空行
 				Convey("测试队列满了之后添加数据", func() {
 					err := q.Enqueue(5)
 					So(err, ShouldNotEqual, nil)
@@ -49,5 +49,5 @@ func TestArray(t *testing.T) {
 				})
 			})
 		})
-	})
+	}) // 深度
 }
